@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SOUDANEDIR="${HOME}/.soudane"
+basedir="${0%*/*/*}"
+
+source "${basedir}/lib/soudane/self-introduction.bash"
+source "${basedir}/lib/soudane/usage.bash"
+source "${basedir}/lib/soudane/error.bash"
+source "${basedir}/lib/soudane/option.bash"
+
+# サブコマンド
+case "${args[0]}" in
+    'init' )
+        {
+            mkdir -p "${SOUDANEDIR}"
+            touch "${SOUDANEDIR}/soudane.list"
+        } || error "内部エラー - 初期化に失敗しました"
+        exit 0
+        ;;
+    'list' )
+        cat "${SOUDANEDIR}/soudane.list" | sort | uniq -c | sort -r | sed 's/^\s*//g'
+        exit 0
+        ;;
+    'result' )
+        # TODO: あとで
+        exit 0
+        ;;
+esac
+
+# メイン
+[[ -e "${SOUDANEDIR}/soudane.list" ]] || error "初回起動時は '${ME} init' を実行してください"
+
+exec_path="$(pwd)"
+echo "${exec_path}" >> "${SOUDANEDIR}/soudane.list" || error "内部エラー - soudane.listへの書き込みに失敗しました"
+[[ ${?} -eq 0 && ${option_listflag} -eq 1 ]] && echo "${USER}は'${exec_path}'に「Ⓨ そうだね」しました"
+
+# 終了
+exit 0
