@@ -7,6 +7,9 @@
 ## Setup
 
 ```shellsession
+$ make
+# make install
+
 $ # 初回起動時に必ず明示的に実行すること
 $ soudane init
 ```
