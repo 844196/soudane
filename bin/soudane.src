@@ -1,12 +1,12 @@
 #!/bin/bash
 
 SOUDANEDIR="${HOME}/.soudane"
-basedir="${0%*/*/*}"
+libdir="_LIBDIR"
 
-source "${basedir}/lib/soudane/self-introduction.bash"
-source "${basedir}/lib/soudane/usage.bash"
-source "${basedir}/lib/soudane/error.bash"
-source "${basedir}/lib/soudane/option.bash"
+source "${libdir}/self-introduction.bash"
+source "${libdir}/usage.bash"
+source "${libdir}/error.bash"
+source "${libdir}/option.bash"
 
 # サブコマンド
 case "${args[0]}" in
